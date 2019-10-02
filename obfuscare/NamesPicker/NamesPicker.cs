@@ -18,36 +18,8 @@ namespace obfuscare
 
         public SolutionElements SolutionElement { get; }
 
-        public abstract IEnumerable<string> GetNames();
-
-        public static NamesPicker Create(SolutionElements solutionElement)
-        {
-            NamesPicker namesPicker;
-
-            switch (solutionElement)
-            {
-                case SolutionElements.Class:
-                    namesPicker = new ClassNamesPicker();
-                    break;
-                case SolutionElements.Method:
-                    namesPicker = new MethodNamesPicker();
-                    break;
-                case SolutionElements.Property:
-                    namesPicker = new PropertyNamesPicker();
-                    break;
-                case SolutionElements.Field:
-                    namesPicker = new FieldNamesPicker();
-                    break;
-                case SolutionElements.Enum:
-                    namesPicker = new EnumNamesPicker();
-                    break;
-                default:
-                    throw new NotSupportedException();
-            }
-
-            return namesPicker;
-        }
-
+        public abstract IEnumerable<string> Names { get; }
+        
         public NamesPicker(SolutionElements solutionElement)
         {
             SolutionElement = solutionElement;

@@ -5,10 +5,11 @@ namespace obfuscare
 {
     public class ClassNamesPicker : NamesPicker
     {
-        public override IEnumerable<string> GetNames() => classes.Select(cl => cl.Name);
+        public override IEnumerable<string> Names { get; }
 
         public ClassNamesPicker() : base(SolutionElements.Class)
         {
+            Names = classes.Select(cl => cl.Name);
         }
     }
 }
