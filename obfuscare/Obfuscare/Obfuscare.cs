@@ -1,32 +1,42 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace obfuscare
 {
-    public abstract class Obfuscare
+    public class Obfuscare
     {
-        public void PerformObfuscation(string[] codeLines)
+        public string[] PerformObfuscation(string[] codeLines)
         {
             // TODO: make async
-            foreach (var codeLine in codeLines)
+            for (int i = 0; i < codeLines.Length; i++)
             {
-                PerformObfuscation(codeLine);
+                codeLines[i] = PerformObfuscation(codeLines[i]);
             }
+
+            return codeLines;
         }
 
-        public abstract void PerformObfuscation(string codeLine);
+        public string PerformObfuscation(string codeLine)
+        {
+            foreach (var NamesToReplaceName in NamesToReplaceNames)
+            {
+                string pattern = NamesToReplaceName.Key;
+                string target = NamesToReplaceName.Value;
+                Regex regex = new Regex(pattern);
+                codeLine = regex.Replace(codeLine, target);
+            }
 
-        public SolutionElements SolutionElement { get; }
-               
+            return codeLine;
+        }
+
         public IEnumerable<string> Names { get; }
 
         public IDictionary<string, string> NamesToReplaceNames { get; }
 
 
-        public Obfuscare(SolutionElements solutionElements, NamesPickerService namesPickerService)
+        public Obfuscare(NamesPickerService namesPickerService)
         {
-            Names = namesPickerService.GetNamesPicker(solutionElements).Names;
             NamesToReplaceNames = namesPickerService.NamesToReplaceNames;
-            SolutionElement = solutionElements;
         }
     }
 }

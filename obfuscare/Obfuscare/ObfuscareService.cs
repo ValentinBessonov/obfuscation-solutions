@@ -4,11 +4,7 @@ namespace obfuscare
 {
     public class ObfuscareService
     {
-        private readonly IEnumerable<Obfuscare> obfuscares = new List<Obfuscare>
-        {
-        };
-
-        private readonly IDictionary<string, string> namesToReplaceNames;
+        private readonly Obfuscare obfuscare;
 
         public void Obfuscare(IEnumerable<string> csFilePathes)
         {
@@ -22,22 +18,13 @@ namespace obfuscare
 
         private string[] Obfuscare(string[] codeLines)
         {
-            foreach (var obfuscare in obfuscares)
-            {
-                obfuscare.PerformObfuscation(codeLines);
-            }
-
+            obfuscare.PerformObfuscation(codeLines);
             return codeLines;
         }
                 
         public ObfuscareService(NamesPickerService namesPickerService)
         {
-            this.namesToReplaceNames = namesPickerService.NamesToReplaceNames;
-
-            this.obfuscares = new List<Obfuscare>
-            {
-                new ObfuscareClass(namesPickerService),
-            };
+            this.obfuscare = new Obfuscare(namesPickerService);
         }
     }
 }
