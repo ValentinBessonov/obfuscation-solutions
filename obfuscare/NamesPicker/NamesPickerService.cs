@@ -20,19 +20,19 @@ namespace obfuscare
 
             switch (solutionElement)
             {
-                case SolutionElements.Class:
+                case SolutionElements.IClass:
                     namesPicker = new ClassNamesPicker();
                     break;
-                case SolutionElements.Method:
+                case SolutionElements.IMethod:
                     namesPicker = new MethodNamesPicker();
                     break;
-                case SolutionElements.Property:
+                case SolutionElements.IProperty:
                     namesPicker = new PropertyNamesPicker();
                     break;
-                case SolutionElements.Field:
+                case SolutionElements.IField:
                     namesPicker = new FieldNamesPicker();
                     break;
-                case SolutionElements.Enum:
+                case SolutionElements.IEnum:
                     namesPicker = new EnumNamesPicker();
                     break;
                 default:

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace obfuscare
 {
@@ -8,7 +7,7 @@ namespace obfuscare
     {
         public override IEnumerable<string> Names { get; }
 
-        public EnumNamesPicker() : base(SolutionElements.Enum)
+        public EnumNamesPicker() : base(SolutionElements.IEnum)
         {
             var names = new List<string>();
 

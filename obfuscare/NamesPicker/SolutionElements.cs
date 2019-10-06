@@ -2,10 +2,10 @@
 {
     public enum SolutionElements
     {
-        Class,
-        Method,
-        Property,
-        Field,
-        Enum
+        IClass,
+        IMethod,
+        IProperty,
+        IField,
+        IEnum
     }
 }

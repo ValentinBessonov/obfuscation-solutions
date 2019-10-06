@@ -12,7 +12,7 @@ namespace obfuscare
 
         public static void SaveCodeToFile(string filePath, string[] codeLines)
         {
-            //File.WriteAllLines(filePath, codeLines);
+            File.WriteAllLines(filePath, codeLines);
         }
     }
 }

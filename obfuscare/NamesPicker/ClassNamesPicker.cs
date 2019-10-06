@@ -7,7 +7,7 @@ namespace obfuscare
     {
         public override IEnumerable<string> Names { get; }
 
-        public ClassNamesPicker() : base(SolutionElements.Class)
+        public ClassNamesPicker() : base(SolutionElements.IClass)
         {
             Names = classes.Select(cl => cl.Name);
         }

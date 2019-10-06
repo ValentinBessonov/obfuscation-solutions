@@ -9,7 +9,7 @@ namespace obfuscare
         private const FieldAttributes BadAttributes = FieldAttributes.SpecialName | FieldAttributes.RTSpecialName;
         public override IEnumerable<string> Names { get; }
 
-        public FieldNamesPicker() : base(SolutionElements.Field)
+        public FieldNamesPicker() : base(SolutionElements.IField)
         {
             Names = classes.SelectMany(cl => cl.GetFields(bindingFlags))
                 .Where(field => !field.Name.Contains("k__BackingField"))

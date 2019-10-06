@@ -10,7 +10,7 @@ namespace obfuscare
         
         public override IEnumerable<string> Names { get; }
 
-        public MethodNamesPicker() : base(SolutionElements.Method)
+        public MethodNamesPicker() : base(SolutionElements.IMethod)
         {
             Names = classes.SelectMany(cl => cl.GetMethods(bindingFlags))
                 .Where(method => !HasAttribute(method.Attributes))

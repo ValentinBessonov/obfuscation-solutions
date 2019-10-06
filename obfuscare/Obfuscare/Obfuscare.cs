@@ -20,7 +20,7 @@ namespace obfuscare
         {
             foreach (var NamesToReplaceName in NamesToReplaceNames)
             {
-                string pattern = NamesToReplaceName.Key;
+                string pattern = $@"\b{NamesToReplaceName.Key}\b";
                 string target = NamesToReplaceName.Value;
                 Regex regex = new Regex(pattern);
                 codeLine = regex.Replace(codeLine, target);

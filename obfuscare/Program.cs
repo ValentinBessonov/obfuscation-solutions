@@ -13,7 +13,7 @@ namespace obfuscare
             var obfuscareService = new ObfuscareService(namesPickerService);
 
             obfuscareService.Obfuscare(GetCsFilePathes(GetSolutionPath(args)));
-
+            Console.WriteLine("Done");
             Console.ReadLine();            
         }
 
