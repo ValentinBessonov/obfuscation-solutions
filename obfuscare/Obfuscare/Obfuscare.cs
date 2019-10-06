@@ -2,15 +2,31 @@
 
 namespace obfuscare
 {
-    public abstract class Obfuscare<T> where T: NamesPicker
+    public abstract class Obfuscare
     {
-        public IEnumerable<string> nameForObfuscare { get; set; }
-                
-        public abstract string PerformObfuscation(string fileCode);
-
-        public Obfuscare(T namePicker)
+        public void PerformObfuscation(string[] codeLines)
         {
-            nameForObfuscare = namePicker.Names;
+            // TODO: make async
+            foreach (var codeLine in codeLines)
+            {
+                PerformObfuscation(codeLine);
+            }
+        }
+
+        public abstract void PerformObfuscation(string codeLine);
+
+        public SolutionElements SolutionElement { get; }
+               
+        public IEnumerable<string> Names { get; }
+
+        public IDictionary<string, string> NamesToReplaceNames { get; }
+
+
+        public Obfuscare(SolutionElements solutionElements, NamesPickerService namesPickerService)
+        {
+            Names = namesPickerService.GetNamesPicker(solutionElements).Names;
+            NamesToReplaceNames = namesPickerService.NamesToReplaceNames;
+            SolutionElement = solutionElements;
         }
     }
 }

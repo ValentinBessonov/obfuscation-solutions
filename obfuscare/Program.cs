@@ -9,17 +9,10 @@ namespace obfuscare
     {
         static void Main(string[] args)
         {
-            var solutionPath = GetSolutionPath(args);
+            var namesPickerService = new NamesPickerService();
+            var obfuscareService = new ObfuscareService(namesPickerService);
 
-            Console.WriteLine(solutionPath);
-            var csFilePathes = GetCsFilePathes(solutionPath);
-
-            foreach (var item in csFilePathes)
-            {
-                Console.WriteLine(item);
-            }
-
-            ObfuscareService.Obfuscare(csFilePathes);
+            obfuscareService.Obfuscare(GetCsFilePathes(GetSolutionPath(args)));
 
             Console.ReadLine();            
         }

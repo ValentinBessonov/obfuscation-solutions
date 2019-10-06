@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace obfuscare
 {
@@ -13,7 +14,11 @@ namespace obfuscare
 
             foreach (Type cl in classes)
             {
-                names.AddRange(cl.GetEnumNames());
+                if (cl.IsEnum)
+                {
+                    names.Add(cl.Name);
+                }
+                
             }
 
             Names = names;

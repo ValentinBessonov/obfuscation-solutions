@@ -11,8 +11,9 @@ namespace obfuscare
         protected internal const BindingFlags bindingFlags = BindingFlags.Instance
                                                 | BindingFlags.Static
                                                 | BindingFlags.Public
-                                                | BindingFlags.NonPublic 
+                                                | BindingFlags.NonPublic
                                                 | BindingFlags.DeclaredOnly;
+
 
         protected internal readonly Type[] classes;
 

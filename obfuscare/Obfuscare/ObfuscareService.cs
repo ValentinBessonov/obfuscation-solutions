@@ -1,35 +1,43 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace obfuscare
 {
-    public static class ObfuscareService
+    public class ObfuscareService
     {
-        public static void Obfuscare(IEnumerable<string> csFilePathes)
+        private readonly IEnumerable<Obfuscare> obfuscares = new List<Obfuscare>
         {
-            // make async
+        };
+
+        private readonly IDictionary<string, string> namesToReplaceNames;
+
+        public void Obfuscare(IEnumerable<string> csFilePathes)
+        {
+            // TODO: make async
             foreach (var csFilePath in csFilePathes)
             {
-                var codeLines = Obfuscare(GetCodeLinesFromFile(csFilePath));
-                SaveCodeToFile(csFilePath, codeLines);
+                var codeLines = Obfuscare(FileHelper.GetCodeLines(csFilePath));
+                FileHelper.SaveCodeToFile(csFilePath, codeLines);
             }
         }
 
-        private static string[] Obfuscare(string[] codeLines)
+        private string[] Obfuscare(string[] codeLines)
         {
-            // sink about
+            foreach (var obfuscare in obfuscares)
+            {
+                obfuscare.PerformObfuscation(codeLines);
+            }
+
             return codeLines;
         }
-
-        private static string[] GetCodeLinesFromFile(string filePath)
+                
+        public ObfuscareService(NamesPickerService namesPickerService)
         {
-            return File.ReadAllLines(filePath, Encoding.UTF8);
-        }
+            this.namesToReplaceNames = namesPickerService.NamesToReplaceNames;
 
-        private static void SaveCodeToFile(string filePath, string[] codeLines)
-        {
-            File.WriteAllLines(filePath, codeLines);
+            this.obfuscares = new List<Obfuscare>
+            {
+                new ObfuscareClass(namesPickerService),
+            };
         }
     }
 }
