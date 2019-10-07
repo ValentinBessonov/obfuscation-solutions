@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace obfuscare
 {
@@ -73,14 +74,24 @@ namespace obfuscare
         }
 
         public NamesPickerService()
-        {
+        {            
             NamesPickers = new Dictionary<SolutionElements, NamesPicker>();
+
             foreach (SolutionElements solutionElements in (SolutionElements[])Enum.GetValues(typeof(SolutionElements)))
             {
                 NamesPickers.Add(solutionElements, Create(solutionElements));
             }
 
-            NamesToReplaceNames = GetReplaceNames();
+            if (FileHelper.TryGetRenameDictionary(out var renameDictionary))
+            {
+                NamesToReplaceNames = renameDictionary.ToDictionary(x => x.Value, x => x.Key);
+                FileHelper.RemoveRenameDictionary();
+            }
+            else
+            {
+                NamesToReplaceNames = GetReplaceNames();
+                FileHelper.SaveRenameDictionary(NamesToReplaceNames);
+            }            
         }
     }
 }
