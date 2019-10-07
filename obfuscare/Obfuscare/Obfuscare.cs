@@ -16,17 +16,17 @@ namespace obfuscare
             return codeLines;
         }
 
-        public string PerformObfuscation(string codeLine)
+        public string PerformObfuscation(string fileBody)
         {
             foreach (var NamesToReplaceName in NamesToReplaceNames)
             {
                 string pattern = $@"\b{NamesToReplaceName.Key}\b";
                 string target = NamesToReplaceName.Value;
                 Regex regex = new Regex(pattern);
-                codeLine = regex.Replace(codeLine, target);
+                fileBody = regex.Replace(fileBody, target);
             }
 
-            return codeLine;
+            return fileBody;
         }
 
         public IEnumerable<string> Names { get; }

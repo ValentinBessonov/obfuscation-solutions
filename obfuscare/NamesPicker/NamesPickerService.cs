@@ -36,6 +36,9 @@ namespace obfuscare
                 case SolutionElements.IEnum:
                     namesPicker = new EnumNamesPicker();
                     break;
+                case SolutionElements.IVariable:
+                    namesPicker = new VariableNamesPicker(FileHelper.GetCsFileBodies());
+                    break;
                 default:
                     throw new NotSupportedException();
             }

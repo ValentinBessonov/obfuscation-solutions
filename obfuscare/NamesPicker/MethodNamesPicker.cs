@@ -12,10 +12,12 @@ namespace obfuscare
 
         public MethodNamesPicker() : base(SolutionElements.IMethod)
         {
-            Names = classes.SelectMany(cl => cl.GetMethods(bindingFlags))
+            List<string> names = classes.SelectMany(cl => cl.GetMethods(bindingFlags))
                 .Where(method => !HasAttribute(method.Attributes))
                 .Where(method => !method.Name.Contains(".ctor"))
-                .Select(method => method.Name);
+                .Where(method => method.Name != "Main")
+                .Select(method => method.Name).ToList();
+            Names = names;
         }
 
         private bool HasAttribute(MethodAttributes attributes)

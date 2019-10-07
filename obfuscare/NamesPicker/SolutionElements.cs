@@ -6,6 +6,7 @@
         IMethod,
         IProperty,
         IField,
-        IEnum
+        IEnum,
+        IVariable
     }
 }
